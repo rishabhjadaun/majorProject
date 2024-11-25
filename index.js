@@ -9,8 +9,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
-
 mongoose
   .connect(
     "mongodb+srv://rishabhkumarsingh13:iot123@cluster0.34z8u.mongodb.net/",
@@ -27,6 +25,9 @@ mongoose
   });
 
 // Unlock API
+
+const axios = require("axios"); // Add axios for HTTP requests
+
 app.post("/api/unlock", async (req, res) => {
   const { password } = req.body;
 
@@ -38,7 +39,10 @@ app.post("/api/unlock", async (req, res) => {
     await Log.create({ passwordAttempt: password, success });
 
     if (success) {
-      // Signal ESP32
+      // Send the unlock signal to ESP32
+      const esp32Url = "http://192.168.125.108"; // Replace with your ESP32's IP address
+      await axios.post(esp32Url, { password }); // Send the password to ESP32
+
       return res.json({ success: true });
     }
     return res
