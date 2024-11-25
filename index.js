@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Password = require("./models/Password");
 const Log = require("./models/Log");
 const cors = require("cors");
-
+const axios = require("axios"); 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,7 +26,7 @@ mongoose
 
 // Unlock API
 
-const axios = require("axios"); // Add axios for HTTP requests
+// Add axios for HTTP requests
 
 app.post("/api/unlock", async (req, res) => {
   const { password } = req.body;
