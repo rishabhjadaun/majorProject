@@ -40,7 +40,7 @@ app.post("/api/unlock", async (req, res) => {
 
     if (success) {
       // Send the unlock signal to ESP32
-      const esp32Url = "http://192.168.125.108"; // Replace with your ESP32's IP address
+      const esp32Url = "http://192, 168, 43, 50"; // Replace with your ESP32's IP address
       await axios.post(esp32Url, { password }); // Send the password to ESP32
 
       return res.json({ success: true });
